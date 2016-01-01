@@ -25,9 +25,19 @@ class ReproduceIssuesIntegrationSpec extends Specification {
         new AuthoredBook(author: author2, book: book2).save()
     }
 
-    void "find all by author or book"() {
+    void "find all by author or book -- dynamic finder"() {
         expect:
         AuthoredBook.findAllByAuthorOrBook(author2, book1).size() == 2
+    }
+
+    void "find all by author or book -- criteria"() {
+        expect:
+        AuthoredBook.withCriteria {
+            or {
+                eq("author", author2)
+                eq("book", book1)
+            }
+        }.size() == 2
     }
 
     void "find all by author and book"() {
