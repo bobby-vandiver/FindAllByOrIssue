@@ -59,6 +59,11 @@ class ReproduceIssuesIntegrationSpec extends Specification {
         }.size() == 2
     }
 
+    void "find by author and book"() {
+        expect:
+        AuthoredBook.findByAuthorAndBook(author1, book1) != null
+    }
+
     void "find all by author and book"() {
         expect:
         AuthoredBook.findAllByAuthorAndBook(author1, book1).size() == 1
